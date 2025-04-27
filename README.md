@@ -40,7 +40,7 @@ to get started with GitHub workflows.
 
 The configuration file is in YAML and has the following format:
 
-* `version: '2.9.3'` — The MacPorts version to install.
+* `version: '2.10.5'` — The MacPorts version to install, if a specific one is desired. This will cause macpports to be built from source. If left blank, the latest release will be used instead.
 * `prefix: '/opt/local'` — The installation prefix to install MacPorts to.
   The default is `/opt/local` and only needs to be changed when
   preparing self-install packages for instane.
@@ -81,7 +81,7 @@ on:
 jobs:
   install-macports-on-macos-11:
     runs-on: macos-11
-    name: 'Install MacPorts 2.9.3 on MacOS 11'
+    name: 'Install MacPorts 2.10.5 on MacOS 11'
     steps:
       - uses: actions/checkout@v3
       - uses: melusina-org/setup-macports@v1
@@ -90,17 +90,17 @@ jobs:
           parameters: 'testsuite/run-testsuite-on-macos-11.yaml'
       - name: 'Validate installed MacPorts version'
         run: >-
-          test "$(port version)" = 'Version: 2.9.3'
+          test "$(port version)" = 'Version: 2.10.5'
       - name: 'Validate transmitted MacPorts prefix'
         run: >-
           test "${{ steps.macports.outputs.prefix }}" = '/opt/local'
       - name: 'Validate transmitted MacPorts version'
         run: >-
-          test "${{ steps.macports.outputs.version }}" = '2.9.3'
+          test "${{ steps.macports.outputs.version }}" = '2.10.5'
 
   install-macports-on-macos-12:
     runs-on: macos-12
-    name: 'Install MacPorts 2.9.3 on MacOS 12'
+    name: 'Install MacPorts 2.10.5 on MacOS 12'
     steps:
       - uses: actions/checkout@v3
       - name: 'Run testsuite'
@@ -115,7 +115,7 @@ jobs:
 ## Example parameters
 
 ```yaml
-version: '2.9.3'
+version: ''
 prefix: '/opt/local'
 variants:
   select:
